@@ -1,34 +1,82 @@
 import React, {Component, useState} from "react";
 import RecipieChoices from "./RecipieChoices";
+import drinksJson from "./drinks.json"
+import { random } from "lodash";
 
-const BaristaForm =  () =>{
+
+const BaristaForm =  () => {
 
     // creating a state variable to handle all 
-// of the controlled inputs for our four basic ingridient categories
+    // of the controlled inputs for our four basic ingridient categories
 
-const [inputs, setInputs] = useState({
-    'temperature' : "",
-    "mik": "",
-    "syrup":"",
-    "blended": ""
-});
-
-const ingredients = {
-    'temperature' : ['hot', 'lukewarm', 'cold'],
-    'syrup': ['mocha', 'vanilla', 'toffee', 'maple', 'caramel', 'other', 'none'],
-    'milk': ['cow', 'oat', 'goat', 'almond', 'none'],
-    'blended': ['yes', 'turbo', 'no']
-}
-    const onNewDrink =() =>{
-        //code goes here
+    // state varaible to hold the currentdrink name
+    const [currentDrink ,setCurrentDrink] = useState("");
+    // state variable to hold the currentDrink and its trueRecipe
+    const[trueRecipe, setTrueRecipe] = useState(
+        {
+            'temperature' : "",
+            "mik": "",
+            "syrup":"",
+            "blended": ""
+        }
+    );
+    const getNextDrink = () => {
+        console.log("from getNextDrink...")
+        let randomDrinkIndex = Math.floor(Math.random()* drinksJson.drinks.length);
+        //set the currentDrink state variable to the name at the random index of the 
+        //drinks list in the drinksJson
+        console.log("name...", drinksJson.drinks[randomDrinkIndex].name)
+        setCurrentDrink(drinksJson.drinks[randomDrinkIndex].name)
+        //setting the trueRecipe state varaible to the ingredients associated 
+        // with that drink
+        console.log("ingridients... ",drinksJson.drinks[randomDrinkIndex].ingredients)
+        setTrueRecipe(drinksJson.drinks[randomDrinkIndex].ingredients)
+    }  
+    const onNewDrink = () =>{
+        //intended to clear out past state variable
+        console.log("calling onNewDrink..")
+        setInputs({
+            'temperature':'',
+            'milk': '',
+            'syrup':'',
+            'blended': '',
+        });
+        getNextDrink();
     };
     const onCheckAnswer = () =>{
         //code goes here
     };
+    const [inputs, setInputs] = useState({
+        'temperature' : "",
+        "mik": "",
+        "syrup":"",
+        "blended": ""
+    });
+
+    const ingredients = {
+        'temperature' : ['hot', 'lukewarm', 'cold'],
+        'syrup': ['mocha', 'vanilla', 'toffee', 'maple', 'caramel', 'other', 'none'],
+        'milk': ['cow', 'oat', 'goat', 'almond', 'none'],
+        'blended': ['yes', 'turbo', 'no']
+    }
+
+
+
     return(
         <div>
             <h2>Hi, I'd like to order a:</h2>
             
+            <div className="drink-container">
+                <h2 className="mini-header">{currentDrink}</h2>
+                <button
+                   type="new-drink-button"
+                   className="button newdrink"
+                   onClick={onNewDrink} 
+                >
+                    🔃
+                </button>
+            </div>
+
             <h3>Temperature</h3>
             <div className="answer-space">
                 {inputs["temperature"]}
@@ -87,13 +135,13 @@ const ingredients = {
             </form>
             <button type="submit"
                     className="button submit"
-                    onClick={onCheckAnswer()}
+                    onClick={onCheckAnswer}
             >Check Answer
             </button>
 
             <button type="new-drink-button"
             className="button submit"
-            onClick={onNewDrink()}
+            onClick={onNewDrink}
             >New Drink</button>
         </div>
     );
