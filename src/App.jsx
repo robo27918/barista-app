@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import viteLogo from '/vite.svg'
 import './App.css'
-import BaristaForm from './Components/baristaForm';
+import BaristaForm from './Components/BaristaForm';
 function App() {
   
 
@@ -14,7 +14,7 @@ function App() {
           
       </div>
       <BaristaForm>
-        
+
       </BaristaForm>
     </>
   );
