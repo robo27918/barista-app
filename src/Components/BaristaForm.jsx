@@ -2,7 +2,7 @@ import React, {Component, useState} from "react";
 import RecipieChoices from "./RecipieChoices";
 import drinksJson from "./drinks.json"
 import { random } from "lodash";
-
+import './BaristaForm.css'
 
 const BaristaForm =  () => {
 
@@ -117,7 +117,8 @@ const BaristaForm =  () => {
                     🔃
                 </button>
             </div>
-
+            
+            <div className="mini-container">
             <h3>Temperature</h3>
             <div className="answer-space" id={tempGuess}>
                 {inputs["temperature"]}
@@ -132,6 +133,8 @@ const BaristaForm =  () => {
                 choices ={ingredients["temperature"]}
                 checked={inputs["temperature"]}
             />
+            </div>
+            <div className="mini-container">
             <h3>Milk</h3>
             <div className="answer-space" id={milkGuess}>
                 {inputs["milk"]}
@@ -145,6 +148,8 @@ const BaristaForm =  () => {
                 choices ={ingredients["milk"]}
                 checked={inputs["milk"]}
             />
+            </div>
+            <div className="mini-container">
               <h3>Syrup</h3>
                 <div className="answer-space" id={syrupGuess}>
                     {inputs["syrup"]}
@@ -158,6 +163,8 @@ const BaristaForm =  () => {
                 choices ={ingredients["syrup"]}
                 checked={inputs["syrup"]}
             />
+             </div>
+            <div className="mini-container">
             <h3>Blended</h3>
                 <div className="answer-space" id={blendedGuess}>
                     {inputs["syrup"]}
@@ -171,7 +178,8 @@ const BaristaForm =  () => {
                 choices ={ingredients["blended"]}
                 checked={inputs["blended"]}
             />
-            <form>
+            </div>
+            <form className="container">
                 
             </form>
             <button type="submit"

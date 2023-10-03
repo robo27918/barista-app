@@ -1,5 +1,5 @@
 import React, {Component, useEffect, useState} from "react";
-
+import './BaristaForm.css'
 const RecipieChoices = ({handleChange, label, choices,checked}) =>{
     return (
         <div>
