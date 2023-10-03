@@ -20,6 +20,13 @@ const BaristaForm =  () => {
             "blended": ""
         }
     );
+
+    //state variable to store input guess
+    const [tempGuess, setTempGuess] = useState("");
+    const [milkGuess, setMilkGuess] = useState("");
+    const [syrupGuess, setSyrupGuess] = useState("");
+    const [blendedGuess, setBlendedGuess] = useState("");
+   
     const getNextDrink = () => {
         console.log("from getNextDrink...")
         let randomDrinkIndex = Math.floor(Math.random()* drinksJson.drinks.length);
@@ -41,10 +48,44 @@ const BaristaForm =  () => {
             'syrup':'',
             'blended': '',
         });
+        //resetting guess state varaibles
+        setCurrentDrink('');
+        setTempGuess("");
+        setBlendedGuess('');
+        setMilkGuess("")
+        setSyrupGuess("");
         getNextDrink();
     };
     const onCheckAnswer = () =>{
-        //code goes here
+        
+
+        if (trueRecipe.temp != inputs['temperature']){
+            setTempGuess('wrong');
+        }
+        else {
+            setTempGuess("correct");
+        }
+
+        if (trueRecipe.temp != inputs['blended']){
+            setBlendedGuess('wrong');
+        }
+        else {
+            setBlendedGuess("correct");
+        }
+        if (trueRecipe.temp != inputs['milk']){
+            setMilkGuess('wrong');
+        }
+        else {
+            setMilkGuess("correct");
+        }
+        if (trueRecipe.temp != inputs['syrup']){
+            setSyrupGuess('wrong');
+        }
+        else {
+            setSyrupGuess("correct");
+        }
+  
+  
     };
     const [inputs, setInputs] = useState({
         'temperature' : "",
@@ -78,7 +119,7 @@ const BaristaForm =  () => {
             </div>
 
             <h3>Temperature</h3>
-            <div className="answer-space">
+            <div className="answer-space" id={tempGuess}>
                 {inputs["temperature"]}
             </div>
 
@@ -92,7 +133,7 @@ const BaristaForm =  () => {
                 checked={inputs["temperature"]}
             />
             <h3>Milk</h3>
-            <div className="answer-space">
+            <div className="answer-space" id={milkGuess}>
                 {inputs["milk"]}
             </div>
             <RecipieChoices
@@ -105,7 +146,7 @@ const BaristaForm =  () => {
                 checked={inputs["milk"]}
             />
               <h3>Syrup</h3>
-                <div className="answer-space">
+                <div className="answer-space" id={syrupGuess}>
                     {inputs["syrup"]}
                 </div>
             <RecipieChoices
@@ -118,7 +159,7 @@ const BaristaForm =  () => {
                 checked={inputs["syrup"]}
             />
             <h3>Blended</h3>
-                <div className="answer-space">
+                <div className="answer-space" id={blendedGuess}>
                     {inputs["syrup"]}
             </div>
             <RecipieChoices
